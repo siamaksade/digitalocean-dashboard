@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DigitalOcean Dashboard - Red Hat Summit 2018 Lab: DevOps Workshop with OpenShift and OpenShift Ansible Broker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>DigitalOcean Dashboard</h1>
+    <h3>Droplets</h3>
+    <ul th:each="droplet : ${droplets}">
+        <li><td th:text="${droplet.name}"/></li>
+    </ul>
+</body>
+</html>
