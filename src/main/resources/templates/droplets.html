@@ -3,12 +3,33 @@
 <head>
     <title>DigitalOcean Dashboard - Red Hat Summit 2018 Lab: DevOps Workshop with OpenShift and OpenShift Ansible Broker</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Refresh" content="10;URL='/droplets'" />
+    <link integrity="" rel="stylesheet" href="/css/bulma.min.css">
+    <link integrity="" rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
 <body>
-    <h1>DigitalOcean Dashboard</h1>
-    <h3>Droplets</h3>
-    <ul th:each="droplet : ${droplets}">
-        <li><td th:text="${droplet.name}"/></li>
-    </ul>
+    <section class="section">
+        <div class="content">
+            <h1 class="title">DigitalOcean Dashboard - Droplets</h1>
+            <div class="tile is-ancestor">
+                <div class="tile is-parent is-3" th:each="droplet : ${droplets}">
+                    <div class="tile notification is-info is-child">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="droplet-name">
+                            <span th:text="${#strings.abbreviate(droplet.name,24)}" /> (<span th:text="${droplet.status}" />)
+                        </span>
+                    </div>
+                </div>
+                <div class="tile is-parent" th:if="${droplets.isEmpty()}">
+                    <div class="tile is-child">
+                        No Droplets Provisioned Yet!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

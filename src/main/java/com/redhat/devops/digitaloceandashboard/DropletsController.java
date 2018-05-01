@@ -26,6 +26,7 @@ public class DropletsController {
     private static final String DIGITALOCEAN_API = "https://api.digitalocean.com/v2/droplets?page=1&per_page=200";
     private static final String KEY_DROPLETS = "DROPLETS";
     private static final String CACHE_DROPLETS = "DROPLETS";
+    private static final int CACHE_TIMEOUT = 10;
 
     @Value("${digitalocean.api.token}")
     private String apiToken;
@@ -59,7 +60,7 @@ public class DropletsController {
                     Map<String, Object> dropletObj = (Map<String, Object>) o;
                     return new Droplet((Integer) dropletObj.get("id"), (String) dropletObj.get("name"), (String) dropletObj.get("status"));
                 }).collect(Collectors.toList());
-            cache.put(KEY_DROPLETS, droplets, 15, TimeUnit.SECONDS);
+            cache.put(KEY_DROPLETS, droplets, CACHE_TIMEOUT, TimeUnit.SECONDS);
         }
 
         return droplets;
